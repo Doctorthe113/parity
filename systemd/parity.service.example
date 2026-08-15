@@ -1,0 +1,15 @@
+[Unit]
+Description=Parity config sync watcher
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+# Install the compiled binary first:
+#   bun run build && install -Dm755 parity ~/.local/bin/parity
+ExecStart=%h/.local/bin/parity watch --foreground
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=default.target
